@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	cout<<"this is  a test!!!"<<endl;
+	cout<<"Please input your age:";
+	int age;
+	cin>>age;
+	cout<<endl;
+	system("pause");
+	return 0;
+
+
+}
