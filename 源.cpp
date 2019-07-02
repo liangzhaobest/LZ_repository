@@ -29,6 +29,7 @@ private:
 public:
 	Management()
 	{
+		
 		present = 0;
 	}
 	int n1 = 0; int n2 = 0;int n3 = 0;
@@ -83,7 +84,7 @@ void Management::GetN()
 	cout << "(注：客车的基本维护费用为2000元/月,小轿车为1000元，卡车1500元）"
 		<< "每台车当月费用=油价*耗油量/公里+基本维护费用" << endl;
 }
-void Management::Getinfor()//获取信息
+void Management::Getinfor()//获取信息包括不同类型的特有数据
 {
 	int  a(1);
 	while (true)
@@ -103,7 +104,7 @@ void Management::Getinfor()//获取信息
 					break;
 				}
 			}
-			if (a == 1)
+			if (a == 1)//输入基本信息
 			{
 				t[present].Number = i;
 				Gettype();
@@ -132,9 +133,9 @@ void Management::Getinfor()//获取信息
 	Sleep(800);
 	Menu();
 }
-void Management::Searinfor()
+void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 {
-	int i;
+	int i;//选择查询方式
 	cout << "*请选择你需要查找方式：\n"
 		<< "*1.编号\n"
 		<< "*2.制造公司\n"
@@ -220,7 +221,7 @@ void Management::Searinfor()
 	}
 	cout << "请按任意键继续！";char z = _getch(); Menu();
 }
-void Management::Delinfor()
+void Management::Delinfor()//删除信息
 {
 	int i;int k = 0;
 	while (true)
@@ -231,7 +232,7 @@ void Management::Delinfor()
 		}
 		else
 		{
-			cout << "请输入要删除车辆的编号：";cin >> i;
+			cout << "请输入要删除车辆的编号：";cin >> i;//查找要删除车辆的编号
 			for (int j = 0;j < present;j++)
 			{
 				if (t[j].Number == i)
@@ -262,13 +263,13 @@ void Management::Delinfor()
 	Sleep(1000);
 	Menu();
 }
-void Management::Ediinfor()
+void Management::Ediinfor()//编辑
 {
 	int n;	int p = 0;
-	cout << "请输入要查找车辆的编号：";cin >> n;
+	cout << "请输入要查找车辆的编号：";cin >> n;//先查找要编辑的车辆
 	for (int i = 0;i < present;i++)
 	{
-		if (t[i].Number == n)
+		if (t[i].Number == n)//利用if判断是否修改，定义temp 临时对象以实现是否保存修改
 		{
 			int a;int b;int c;Trans temp;temp = t[i];
 			cout << "已查询到你要找的车辆，请开始编辑：（注：不希望修改的地方请回车或空格输入1,需要修改请输入任意数字继续.编号无法修改！）";
@@ -346,7 +347,7 @@ void Management::Ediinfor()
 			break;
 			}
 			int k;
-			cout << "是否确认修改？（1.是 2.否）：";
+			cout << "是否确认修改？（1.是 2.否）：";//判断是否修改
 			cin >> k;
 			if (k == 1)
 			{
@@ -365,7 +366,7 @@ void Management::Ediinfor()
 	Sleep(1000);
 	Menu();
 }
-void Management::Calinfor()
+void Management::Calinfor()//统计信息
 {
 	cout << "**信息统计的结果如下：\n"
 		<< "@车辆总数：" << present << "辆" << endl;
@@ -385,7 +386,7 @@ void Management::Calinfor()
 	cout << "任意键继续" << endl;char z = _getch();
 	Menu();
 }
-void Management::Sort()
+void Management::Sort()//排序，分两种方式
 {
 	int p;
 	cout << "请输入你想要的排序方式：1.从小到大2.从大到小：";cin >> p;
@@ -425,7 +426,7 @@ void Management::Sort()
 	}
 	break;
 	}
-	cout << "\n\n排序完成！已按照要求的三种类型车辆耗油量大小进行排序，结果如下：\n";
+	cout << "\n\n排序完成！已按照要求的三种类型车辆耗油量大小进行排序，结果如下：\n";//输出排序结果
 	for (int i = 0;i < present;i++)
 	{
 		if (t[i].type == 1)
@@ -464,7 +465,7 @@ void Management::Sort()
 	}
 	cout << "排序已结束，即将返回菜单！按任意键继续" << endl;char z = _getch();Menu();
 }
-void Management::Showinfor()
+void Management::Showinfor()//显示信息
 {
 	
 	if (present != 0)
@@ -481,7 +482,7 @@ void Management::Showinfor()
 	char z = _getch();
 	Menu();
 }
-void Management::Menu()
+void Management::Menu()//菜单
 {
 	
 	system("cls");
@@ -517,11 +518,11 @@ void Management::Menu()
 		break;
 	}
 }
-void Management::read()
+/*void Management::read()//读操作
 {
 	while (1)
 	{
-		ifstream read("d:\\project\\梁炤课程设计\\information.txt", ios::in);
+		ifstream read("d:\\project\\梁炤课程设计\\infor.txt", ios::in);
 		if (read)
 		{
 			while (!read.eof())
@@ -547,9 +548,9 @@ void Management::read()
 		Menu();
 	}
 	
-	
-}
-void Management::write()
+	present = n1 + n2 + n3;
+}*/
+void Management::write()//写操作
 {
 	ofstream write;
 	write.open("d:\\project\\梁炤课程设计\\information.txt", ios::out);
@@ -573,8 +574,15 @@ void Management::write()
 	else cout << "写入失败！" << endl;
 	cout << "任意键继续！";char z = _getch();Menu();
 }
-void Management::Store()
+void Management::Store()//保存
 {
+	int  M;
+	cout << "是否确认保存？";cin >> M;//判断是否保存信息
+	if (M == 1)
+	{
+		cout << "开始保存" << endl;
+	}
+	else Menu();
 	ofstream fileout("d:\\project\\梁炤课程设计\\infor.txt", ios::trunc);
 	fileout.close();
 	ofstream write("d:\\project\\梁炤课程设计\\infor.txt");
@@ -603,7 +611,31 @@ int main()
 		<< "--*---*---*--*---*---*----*----*---*---*---*---*---*-----*\n" << endl;
 	cout << "按任意键继续！" << endl;
 	char z = _getch();
-	
 	mc.Menu();
 	return 0;
+}
+void Management::read()
+{
+	fstream f;
+	f.open("d:\\project\\梁炤课程设计\\information.txt", ios::in);
+	if (!f)
+	{
+		cerr << "打开文件错误！" << endl;
+		return;
+	}
+	cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
+	cout << "读取完成！" << endl;
+	while (!f.eof())
+	{
+		f>> t[present].Number >> t[present].type >> t[present].carnum >> t[present].cname >> t[present].year >> t[present].month >> t[present].day >> t[present].km >> t[present].V >> t[present].ymoney;
+		if (t[present].type == 1)
+			f >> t[present].B;
+		else if (t[present].type == 2)
+			f >> t[present].C;
+		else
+			f >> t[present].T;
+		present++;
+	}
+	f.close();
+	cout << "读文件完成" << endl;Sleep(200);Menu();
 }
