@@ -9,13 +9,8 @@
 #include<fstream>
 
 #include<Windows.h>
-
 using namespace std;
-
 int y;int temp;
-
-
-
 struct Trans
 
 {
@@ -42,8 +37,8 @@ private:
 	string filename="infor";
 	int N ;
 	string sfilename = "store";
-	Trans t[3];
-
+	Trans t[9];
+    
 	int present;
 
 public:
@@ -53,12 +48,12 @@ public:
 	{
 		present = 0;
 	}
-
+	//~Management() { delete[] t; }
 	int n1 = 0; int n2 = 0;int n3 = 0;
 
 	int Km1 = 0, Km2 = 0, Km3 = 0;
 
-	int price ;
+	int price=10 ;
 	void Getoption();
 
 	void GetN();
@@ -191,7 +186,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 	{
 
-		if (present<N)//判断是否超出容量
+		if (present<9)//判断是否超出容量
 
 		{
 
@@ -1004,7 +999,7 @@ void Management::Menu()//菜单
 
 		<< "=================**8.写入文件**=======================\n"
 
-		<< "=================**9.新建文件**=======================\n"
+		<< "=================**9.读取文件**=======================\n"
 
 		<< "=================**10.保存信息**=======================\n"
 
@@ -1034,7 +1029,7 @@ void Management::Menu()//菜单
 
 	case 8:cout << "***************【写入文件】********************" << endl; write();break;
 
-	case 9:cout << "******************【新建文件】*****************" << endl;read();break;
+	case 9:cout << "******************【读取文件】*****************" << endl;read();break;
 
 	case 10:cout << "******************【保存信息】*****************" << endl;Store();break;
 
@@ -1270,9 +1265,10 @@ void Management::write()
 		cout << "创建文件失败!" << endl;
 		return;
 	}
-	f.write((char*)t, 3* sizeof(Trans));present = n1 + n2 + n3;f << present;
+	f.write((char*)t, 9* sizeof(Trans));present = n1 + n2 + n3;f << present;
+	cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 	cout << "写入成功" << endl;
-	system("pause");
+	
 	f.close();
 	Sleep(200);Menu();
 }
@@ -1291,10 +1287,13 @@ void Management::read()
 	}
 	else
 	{
-		f.read((char*)t, 3 * sizeof(Trans));f >> present;
+		f.read((char*)t, 9 * sizeof(Trans));f >> present;
 		f.close();
+		cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
+
+	
 		cout << "读取完成" << endl;
-		system("pause");
+	
 		Sleep(200);Menu();
 	}
 }
