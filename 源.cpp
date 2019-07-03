@@ -14,15 +14,7 @@ using namespace std;
 
 int y;int temp;
 
-void   Delay(int  time)
 
-{
-
-	clock_t   now = clock();
-
-	while (clock() - now < time);
-
-}
 
 struct Trans
 
@@ -47,9 +39,9 @@ class Management
 {
 
 private:
-
-	int N = 0;
-
+	string filename="infor";
+	int N ;
+	string sfilename = "store";
 	Trans t[3];
 
 	int present;
@@ -66,7 +58,8 @@ public:
 
 	int Km1 = 0, Km2 = 0, Km3 = 0;
 
-	int price = 0;
+	int price ;
+	void Getoption();
 
 	void GetN();
 
@@ -151,6 +144,28 @@ void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，
 	}
 
 }
+void Management::Getoption()
+{
+	int opt;
+	cout << "您是想新建一个文件，还是读取当前文件？（1.新建2.读取）";
+	cin >> opt;
+	switch (opt)
+	{
+	case 1:
+	{
+		cout << "请输入你想写入的文件名：";cin >> filename;
+		cout << "请输入你想保存的文件名：";cin >> sfilename;
+		break;
+	}
+	case 2:
+	{
+		read();
+		break;
+	}
+	default:cout << "将新创建文件！" << endl;
+		break;
+	}
+}
 
 void Management::GetN()
 
@@ -176,7 +191,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 	{
 
-		if (present < 3)//判断是否超出容量
+		if (present<N)//判断是否超出容量
 
 		{
 
@@ -210,7 +225,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 			{
 
-				t[present].Number = i;
+				t[present].Number = i;cout << "行驶里程：";cin >> t[present].km;cout << "耗油量：";cin >> t[present].V;cout << "养路费：";cin >> t[present].ymoney;
 
 				Gettype();
 
@@ -222,7 +237,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 				cout << "购买日期：年：";cin >> t[present].year;cout << "月：";cin >> t[present].month;cout << "日：";cin >> t[present].day;
 
-				cout << "行驶里程：";cin >> t[present].km;cout << "耗油量：";cin >> t[present].V;cout << "养路费：";cin >> t[present].ymoney;
+				
 
 				cout << "已添加该车辆的信息！" << endl;
 
@@ -271,12 +286,10 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 	int i;//选择查询方式
 
 	cout << "*请选择你需要查找方式：\n"
-
 		<< "*1.编号\n"
-
 		<< "*2.制造公司\n"
-
-		<< "*3.类型" << endl;cin >> i;
+		<< "*3.类型\n" 
+		<<"*0.返回菜单"<< endl;cin >> i;
 
 	switch (i)
 
@@ -382,7 +395,7 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 
 	}break;
 
-	default:
+	case 3:
 
 	{
 
@@ -421,19 +434,12 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 				cout << "当前库中共有该公司制造的" << p << "辆车" << endl;
 
 			}
-
-
-
-
-
 		}
 
 		if (p == 0) { cout << "没有该车辆信息！" << endl; }
 
 	}break;
-
-
-
+	default:Menu();break;
 	}
 
 	cout << "请按任意键继续！";char z = _getch(); Menu();
@@ -870,9 +876,9 @@ void Management::Sort()//排序，分两种方式
 
 			cout << "**客车**\n";
 
-			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(12) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(8) << "载客量" <<setw(8)<<"养路费"<<setw(8)<<"总费用"<< endl;
+			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(12) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(8) << "载客量" << setw(8) << "养路费" << setw(8) << "总费用" << endl;
 
-			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].B <<setw(8)<<t[i].ymoney<<setw(8)<<t[i].total_money<< endl;
+			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].B << setw(8) << t[i].ymoney << setw(8) << t[i].total_money << endl;
 
 			cout << "***************************************************************************" << endl;
 
@@ -894,9 +900,9 @@ void Management::Sort()//排序，分两种方式
 
 			cout << "轿车\n";
 
-			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(8) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(8) << "厢数"<<setw(8) <<"养路费"<<setw(8)<<"费用"<< endl;
+			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(8) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(8) << "厢数" << setw(8) << "养路费" << setw(8) << "费用" << endl;
 
-			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].C<<setw(8)<<t[i].ymoney<<setw(8)<<t[i].total_money<< endl;
+			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].C << setw(8) << t[i].ymoney << setw(8) << t[i].total_money << endl;
 
 			cout << "***************************************************************************" << endl;
 
@@ -918,9 +924,9 @@ void Management::Sort()//排序，分两种方式
 
 			cout << "卡车\n";
 
-			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(12) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(5) << "载重"<<setw(8)<<"养路费"<<setw(8)<<"费用" << endl;
+			cout << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(12) << "日期" << setw(8) << "里程" << setw(8) << "耗油" << setw(5) << "载重" << setw(8) << "养路费" << setw(8) << "费用" << endl;
 
-			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].T <<setw(8)<<t[i].total_money<<setw(8)<<t[i].total_money<< endl;
+			cout << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(10) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].km << setw(8) << t[i].V << setw(5) << t[i].T << setw(8) << t[i].total_money << setw(8) << t[i].total_money << endl;
 
 			cout << "***************************************************************************" << endl;
 
@@ -948,13 +954,13 @@ void Management::Showinfor()//显示信息
 
 		cout << "****所有车辆的信息为：\n"
 
-			<< "类型" << setw(5) << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(9) << "里程" << setw(10) << "耗油量" <<setw(8) << "载客量" << setw(8) << "载重量" << setw(8) << "厢数" << setw(8) << "日期" << setw(10)<<"养路费"<<setw(12) << "总费用" << endl;
+			<< "类型" << setw(5) << "编号" << setw(8) << "车牌" << setw(8) << "公司" << setw(9) << "里程" << setw(10) << "耗油量" << setw(8) << "载客量" << setw(8) << "载重量" << setw(8) << "厢数" << setw(8) << "日期" << setw(10) << "养路费" << setw(12) << "总费用" << endl;
 
 		for (int i = 0;i < present;i++)
 
 		{
 
-			cout << t[i].Type << setw(5) << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(8) << t[i].km << setw(8) << t[i].V << setw(8) << t[i].B << setw(9) << t[i].T << setw(7) << t[i].C << setw(8) << t[i].year << "-" << t[i].month << "-" << t[i].day<<setw(8) <<t[i].ymoney<<setw(10)<< t[i].total_money << endl;
+			cout << t[i].Type << setw(5) << t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(8) << t[i].km << setw(8) << t[i].V << setw(8) << t[i].B << setw(9) << t[i].T << setw(7) << t[i].C << setw(8) << t[i].year << "-" << t[i].month << "-" << t[i].day << setw(8) << t[i].ymoney << setw(10) << t[i].total_money << endl;
 
 		}
 
@@ -998,7 +1004,7 @@ void Management::Menu()//菜单
 
 		<< "=================**8.写入文件**=======================\n"
 
-		<< "=================**9.读取文件**=======================\n"
+		<< "=================**9.新建文件**=======================\n"
 
 		<< "=================**10.保存信息**=======================\n"
 
@@ -1028,11 +1034,12 @@ void Management::Menu()//菜单
 
 	case 8:cout << "***************【写入文件】********************" << endl; write();break;
 
-	case 9:cout << "******************【读取文件】*****************" << endl;read();break;
+	case 9:cout << "******************【新建文件】*****************" << endl;read();break;
 
 	case 10:cout << "******************【保存信息】*****************" << endl;Store();break;
 
-	case 11:cout << "******************【退出系统】*****************" << endl;cout << setw(10) << "*感";Sleep(200);cout << "谢";Sleep(200);cout << "您";Sleep(200);cout << "的";Sleep(200);cout << "使";Sleep(200);cout << "用！*";Sleep(200);exit(0);break;
+	case 11:cout << "******************【退出系统】*****************" << endl;int m;cout << "是否确认退出？（是1 否2）";cin >> m;if (m == 1) { cout << "开始退出" << endl; }
+			else Menu();cout << setw(10) << "*感";Sleep(200);cout << "谢";Sleep(200);cout << "您";Sleep(200);cout << "的";Sleep(200);cout << "使";Sleep(200);cout << "用！*";Sleep(200);exit(0);break;
 
 	default:cout << "您的输入有误，请检查后重新输入" << endl;Sleep(200);Menu();
 
@@ -1139,21 +1146,18 @@ void Management::write()//写操作
 void Management::Store()//保存
 
 {
-
 	int  M;
-
-	cout << "是否确认保存？";cin >> M;//判断是否保存信息
-
-	if (M == 1)
-
+	if (sfilename == "store")
 	{
-
-		cout << "开始保存" << endl;
-
+		cout << "保存到前文件！";
 	}
-
+	else cout << "保存到" << sfilename << "文件" << endl;
+	cout << "是否确认保存？是1 否2";cin >> M;//判断是否保存信息
+	if (M == 1)
+	{
+		cout << "开始保存" << endl;
+	}
 	else Menu();
-
 	ofstream fileout("d:\\project\\梁炤课程设计\\store.txt", ios::trunc);
 
 	fileout.close();
@@ -1206,12 +1210,11 @@ int main()
 
 		<< "--*---*---*--*---*---*----*----*---*---*---*---*---*-----*\n" << endl;
 
+	mc.Getoption();
 	cout << "按任意键继续！" << endl;
-
 	char z = _getch();
-
+	//mc.GetN();
 	mc.Menu();
-
 	return 0;
 
 }
@@ -1234,8 +1237,8 @@ int main()
 
 	}
 
-	
-        cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
+
+		cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 		cout << "读取完成！";
 	while (!f.eof())
 
@@ -1245,7 +1248,7 @@ int main()
 	}
 
 
-	
+
 
 	f.close();
 	Sleep(200);Menu();
@@ -1254,13 +1257,20 @@ int main()
 }*/
 void Management::write()
 {
-	ofstream f("d:\\project\\梁炤课程设计\\binary.dat", ios::binary);
+	int m;cout << "是否确认写入？（是1 否2）";cin >> m;if (m == 1) { cout << "开始写入" << endl; }
+	else Menu();
+	if (filename == "infor")
+	{
+		cout << "写入当前文件！";
+	}
+	else cout << "写入" << filename << "文件" << endl;
+	ofstream f(filename, ios::binary);
 	if (!f)
 	{
-		cout << "创建文件失败!"<<endl;
+		cout << "创建文件失败!" << endl;
 		return;
 	}
-	f.write((char*)t, 3 * sizeof(Trans));present = n1 + n2 + n3;f << present;
+	f.write((char*)t, 3* sizeof(Trans));present = n1 + n2 + n3;f << present;
 	cout << "写入成功" << endl;
 	system("pause");
 	f.close();
@@ -1268,15 +1278,29 @@ void Management::write()
 }
 void Management::read()
 {
-	ifstream f("d:\\project\\梁炤课程设计\\binary.dat", ios::binary);
+	if (filename == "infor")
+	{
+		cout << "读取当前文件！";
+	}
+	else cout << "读取" << filename << "文件" << endl;
+	ifstream f(filename, ios::binary);
 	if (!f)
 	{
-		cout << "读取文件失败" << endl;
-		
+		cout << "读取文件失败,将创建新的文件" << endl;
+
 	}
-	f.read((char*)t, 3 * sizeof(Trans));f >> present;
-	f.close();
-	cout << "读取完成" << endl;
-	system("pause");
-	Sleep(200);Menu();
+	else
+	{
+		f.read((char*)t, 3 * sizeof(Trans));f >> present;
+		f.close();
+		cout << "读取完成" << endl;
+		system("pause");
+		Sleep(200);Menu();
+	}
 }
+
+
+
+
+
+
