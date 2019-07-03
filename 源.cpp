@@ -28,7 +28,6 @@ struct Trans
 	int C = 0;int T = 0;int B = 0;
 
 };
-
 class Management
 
 {
@@ -84,7 +83,6 @@ public:
 	void Gettype();
 
 };
-
 void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，给不必要的值赋值
 
 {
@@ -162,7 +160,6 @@ void Management::Getoption()
 		break;
 	}
 }
-
 void Management::GetN()
 
 {
@@ -176,7 +173,6 @@ void Management::GetN()
 		<< "每台车当月费用=油价*耗油量/公里+基本维护费用" << endl;
 
 }
-
 void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 {
@@ -274,7 +270,6 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 	Menu();
 
 }
-
 void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 
 {
@@ -450,7 +445,6 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 	cout << "请按任意键继续！";char z = _getch(); Menu();
 
 }
-
 void Management::Delinfor()//删除信息
 
 {
@@ -511,7 +505,7 @@ void Management::Delinfor()//删除信息
 
 			{
 
-				cout << "要删除的编号不存在！" << endl;
+				cout << "要删除的编号不存在！" << endl;break;
 
 			}
 
@@ -534,7 +528,6 @@ void Management::Delinfor()//删除信息
 	Menu();
 
 }
-
 void Management::Ediinfor()//编辑
 
 {
@@ -747,7 +740,6 @@ void Management::Ediinfor()//编辑
 	Menu();
 
 }
-
 void Management::Calinfor()//统计信息
 
 {
@@ -787,7 +779,6 @@ void Management::Calinfor()//统计信息
 	Menu();
 
 }
-
 void Management::Sort()//排序，分两种方式
 
 {
@@ -945,7 +936,6 @@ void Management::Sort()//排序，分两种方式
 	cout << "排序已结束，即将返回菜单！按任意键继续" << endl;char z = _getch();Menu();
 
 }
-
 void Management::Showinfor()//显示信息
 
 {
@@ -979,7 +969,6 @@ void Management::Showinfor()//显示信息
 	Menu();
 
 }
-
 void Management::Menu()//菜单
 
 {
@@ -1293,7 +1282,7 @@ void Management::read()
 	}
 	else
 	{
-		f.read((char*)t, 9 * sizeof(Trans));f >> present;
+		f.read((char*)t, 9 * sizeof(Trans));f>>present;
 		f.close();
 		cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 
