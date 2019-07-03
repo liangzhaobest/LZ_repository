@@ -37,6 +37,7 @@ private:
 	string filename="infor";
 	int N ;
 	string sfilename = "store";
+	//Trans*t=new Trans[N];
 	Trans t[9];
     
 	int present;
@@ -279,7 +280,7 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 {
 
 	int i;//选择查询方式
-
+	system("cls");
 	cout << "*请选择你需要查找方式：\n"
 		<< "*1.编号\n"
 		<< "*2.制造公司\n"
@@ -323,7 +324,8 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 				else if (t[i].Type == "卡车")cout << "载重：" << t[i].T << endl;
 
 				else cout << "厢数：" << t[i].C << endl;
-
+				int u;
+				cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
 				p++;
 
 			}
@@ -335,7 +337,8 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 		{
 
 			cout << "对不起，当前库中没有这个编号！" << endl;
-
+			int u;
+			cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
 		}
 
 	}break;
@@ -377,6 +380,8 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 				else cout << "厢数：" << t[i].C << endl;
 
 				cout << "当前库中共有该公司制造的" << p << "辆车" << endl;
+				int u;
+				cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
 
 			}
 
@@ -386,7 +391,9 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 
 		}
 
-		if (p == 0) { cout << "没有该车辆信息！" << endl; }
+		if (p == 0) { cout << "没有该车辆信息！" << endl;int u;
+		cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
+		}
 
 	}break;
 
@@ -427,11 +434,14 @@ void Management::Searinfor()//查找信息（按照编号，类型还有公司）
 				else cout << "厢数：" << t[i].C << endl;
 
 				cout << "当前库中共有该公司制造的" << p << "辆车" << endl;
-
+				int u;
+				cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
 			}
 		}
 
-		if (p == 0) { cout << "没有该车辆信息！" << endl; }
+		if (p == 0) { cout << "没有该车辆信息！" << endl;int u;
+		cout << "【********0.返回上一级*********】";cin >> u;if (u == 0) { Searinfor(); };
+		}
 
 	}break;
 	default:Menu();break;
@@ -491,7 +501,7 @@ void Management::Delinfor()//删除信息
 
 					}
 
-					else if (J == "NO" || J == "No" || J == "no") cout << "已取消删除" << endl;
+					else if (J == "NO" || J == "No" || J == "no") cout << "已取消删除" << endl;Sleep(200);Menu();
 
 				}
 
@@ -543,21 +553,20 @@ void Management::Ediinfor()//编辑
 
 			int a;int b;int c;Trans temp;temp = t[i];
 
-			cout << "已查询到你要找的车辆，请开始编辑：（注：不希望修改的地方请回车或空格输入1,需要修改请输入任意数字继续.编号无法修改！）";
+			cout << "已查询到你要找的车辆，请开始编辑：（注：不希望修改的地方请两次回车输入1,需要修改请输入2继续,0返回菜单.编号无法修改！）";
 
 			cout << "编号为：" << n << endl;
 
 			cout << "类型：" << t[i].Type;
-
 			cin >> a;
 
 			if (a == 1) {
-				cout << "";
+				cout<<"" ;
 
 			}
 
-			else  cout << "修改为：";cin >> t[i].Type;
-
+			else if (a == 2) { cout << "修改为：";cin >> t[i].Type; }
+			else Menu();
 			cout << " 车牌号：" << t[i].carnum;
 
 			cin >> b;
@@ -567,8 +576,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else  cout << "修改为：";cin >> t[i].carnum;
-
+			else if (b == 2) { cout << "修改为：";cin >> t[i].carnum; }
+			else Menu();
 			cout << " 购买日期：" << t[i].year << "-" << t[i].month << "-" << t[i].day;
 
 			cin >> c;
@@ -578,8 +587,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else cout << "修改为：";cin >> t[i].year;
-
+			else if (c == 2) { cout << "修改为：";cin >> t[i].year; }
+			else Menu();
 			cout << "制造公司：" << t[i].cname;
 
 			cin >> a;
@@ -589,8 +598,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else  cout << "修改为：";cin >> t[i].cname;
-
+			else if (a == 2) { cout << "修改为：";cin >> t[i].cname; }
+			else Menu();
 			cout << " 行驶里程：" << t[i].km << "km";
 
 			cin >> b;
@@ -600,7 +609,7 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else cout << "修改为：";cin >> t[i].km;
+			else if (b == 2) { cout << "修改为：";cin >> t[i].km; }
 
 			cout << " 耗油量：" << t[i].V << "L/KM";
 
@@ -611,8 +620,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else cout << "修改为：";cin >> t[i].V;
-
+			else if (c == 2) { cout << "修改为：";cin >> t[i].V; }
+			else Menu();
 			cout << " 养路费：" << t[i].ymoney << "元";
 
 			cin >> a;
@@ -622,8 +631,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else cout << "修改为：";cin >> t[i].ymoney;
-
+			else if (a == 2) { cout << "修改为：";cin >> t[i].ymoney; }
+			else Menu();
 			cout << "总费用：" << t[i].total_money << "元";
 
 			cin >> b;
@@ -633,8 +642,8 @@ void Management::Ediinfor()//编辑
 
 			}
 
-			else cout << "修改为：";cin >> t[i].total_money;
-
+			else if (b == 2){cout << "修改为：";cin >> t[i].total_money;}
+			else Menu();
 			switch (t[i].type)
 
 			{
@@ -1043,7 +1052,6 @@ void Management::Menu()//菜单
 	}
 
 }
-
 /*void Management::read()//读操作
 
 {
@@ -1184,7 +1192,6 @@ void Management::Store()//保存
 	Menu();
 
 }
-
 int main()
 
 {
@@ -1213,7 +1220,6 @@ int main()
 	return 0;
 
 }
-
 /*void Management::read()
 
 {
