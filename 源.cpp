@@ -649,10 +649,10 @@ void Management::Ediinfor()//编辑
 
 				cin >> a;
 
-				if (a == NULL) { cout << ""; }
+				if (a == 1) { cout << ""; }
 
-				else  cout << "修改为：";cin >> t[i].B;
-
+				else  if (a == 2) { cout << "修改为：";cin >> t[i].B; }
+				else Menu();
 			}
 
 			case 2:
@@ -665,7 +665,7 @@ void Management::Ediinfor()//编辑
 
 				cin >> a;
 
-				if (a == NULL)
+				if (a == 1)
 
 				{
 
@@ -673,8 +673,8 @@ void Management::Ediinfor()//编辑
 
 				}
 
-				else  cout << "修改为：";cin >> t[i].T;
-
+				else  if (a == 2) { cout << "修改为：";cin >> t[i].T; }
+				else Menu();
 			}
 
 			default:
@@ -685,7 +685,7 @@ void Management::Ediinfor()//编辑
 
 				cin >> a;
 
-				if (a == NULL)
+				if (a == 1)
 
 				{
 
@@ -693,8 +693,8 @@ void Management::Ediinfor()//编辑
 
 				}
 
-				else cout << "修改为：";cin >> t[i].T;
-
+				else if (a == 2) { cout << "修改为：";cin >> t[i].T; }
+				else Menu();
 			}
 
 			break;
