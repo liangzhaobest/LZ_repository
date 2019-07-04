@@ -1,98 +1,62 @@
 #include<iostream>
-
 #include<iomanip>
-
 #include<string>
-
 #include<conio.h>
-
 #include<fstream>
-
 #include<Windows.h>
 using namespace std;
-int y;int temp;
 struct Trans
 
 {
-
 	int Number, carnum;
-
 	int type;
-
 	string  cname, Type;
-
 	int year, month, day;
-
 	int km, V, ymoney, jmoney, total_money;
-
 	int C = 0;int T = 0;int B = 0;
-
+	
 };
 class Management
 
 {
-
 private:
 	string filename="infor";
 	int N ;
 	string sfilename = "store";
 	//Trans*t=new Trans[N];
-	Trans t[9];
-    
+	int n1 = 0; int n2 = 0;int n3 = 0;
+	int Km1 = 0, Km2 = 0, Km3 = 0;
+     Trans t[9];
 	int present;
-
 public:
-
 	Management()
-
 	{
 		present = 0;
 	}
 	//~Management() { delete[] t; }
-	int n1 = 0; int n2 = 0;int n3 = 0;
-
-	int Km1 = 0, Km2 = 0, Km3 = 0;
-
 	int price=10 ;
 	void Getoption();
-
 	void GetN();
-
 	void Getinfor();
-
 	void Searinfor();
-
 	void Delinfor();
-
 	void Ediinfor();
-
 	void Showinfor();
-
 	void Calinfor();
-
 	void Sort();
-
 	void Menu();
-
 	void write();
-
 	void read();
-
 	void Store();
-
-	void Gettype();
-
+    void Gettype();
 };
 void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，给不必要的值赋值
 
 {
 
 	cout << "类型的序号(1.客车 2.小轿车 3.卡车）：";cin >> t[present].type;
-
 	switch (t[present].type)
-
 	{
-
 	case 1:
 
 	{
@@ -108,7 +72,6 @@ void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，
 		t[present].total_money = price * t[present].V + t[present].jmoney;n1++;break;
 
 	}
-
 	case 2:
 
 	{
@@ -120,7 +83,6 @@ void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，
 		t[present].jmoney = 1000;t[present].total_money = price * t[present].V + t[present].jmoney;n2++;break;
 
 	}
-
 	case 3:
 
 	{
@@ -136,7 +98,7 @@ void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，
 	default:cout << "输入有误！";Gettype();break;
 
 	}
-
+	
 }
 void Management::Getoption()
 {
@@ -202,9 +164,9 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 				if (t[m].Number == i)
 
 				{
-
-					cout << "该编号已存在！" << endl;
-
+					int choice;
+					cout << "该编号已存在！1 继续输入 2 返回菜单 ：" << endl;cin >> choice;
+					if (choice == 2) { Menu(); }
 					a++;
 
 					break;
@@ -970,15 +932,8 @@ void Management::Showinfor()//显示信息
 
 }
 void Management::Menu()//菜单
-
 {
-
-
-
 	system("cls");
-
-
-
 	cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n"
 
 		<< "=================**1.输入车辆的信息**=================\n"
@@ -999,9 +954,9 @@ void Management::Menu()//菜单
 
 		<< "=================**9.读取文件**=======================\n"
 
-		<< "=================**10.保存信息**=======================\n"
+		<< "=================**10.保存信息**======================\n"
 
-		<< "=================**11.退出系统**=======================\n" << endl;
+		<< "=================**11.退出系统**======================\n" << endl;
 
 	int x;cout << "请输入需要服务的序号：";
 
@@ -1041,100 +996,6 @@ void Management::Menu()//菜单
 	}
 
 }
-/*void Management::read()//读操作
-
-{
-
-	while (1)
-
-	{
-
-		ifstream read("d:\\project\\梁炤课程设计\\infor.txt", ios::in);
-
-		if (read)
-
-		{
-
-			while (!read.eof())
-
-			{
-
-
-
-				read>>  t[present].Number>>t[present].type>> t[present].carnum >> t[present].cname >> t[present].year >> t[present].month >> t[present].day >> t[present].km >>t[present].V >> t[present].ymoney;
-
-				if (t[present].type == 1)
-
-					read >> t[present].B;
-
-				else if (t[present].type == 2)
-
-					read >> t[present].C;
-
-				else
-
-					read>>t[present].T;
-
-					present++;
-
-			}
-
-			read.close();
-
-			break;
-
-		}
-
-		else
-
-		{
-
-			ofstream out("d:\\project\\梁炤课程设计\\information.txt");
-
-			out.close();
-
-		}
-
-		Menu();
-
-	}
-
-
-
-	present = n1 + n2 + n3;
-
-}
-
-void Management::write()//写操作
-
-{
-
-	ofstream write;
-
-	write.open("d:\\project\\梁炤课程设计\\information.txt", ios::out);
-
-	if (write)
-
-	{
-
-		for (int i = 0; i < present; i++)
-
-		{
-
-			cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100);cout << "*";Sleep(100); cout << endl;
-			cout << "第" << i + 1 << "条写入完成！" << endl;
-			write <<t[i].Type<<setw(8)<< t[i].Number << setw(8) << t[i].carnum << setw(8) << t[i].cname << setw(8) << t[i].km << setw(8) << t[i].V << setw(8) << t[i].B << setw(8) << t[i].T << setw(5) << t[i].C << setw(8) << t[i].year << setw(5) << t[i].month << setw(5) << t[i].day << t[i].ymoney << setw(8) << t[i].total_money << endl;
-		}
-		write.close();
-
-	}
-
-	else cout << "写入失败！" << endl;
-
-	cout << "任意键继续！";char z = _getch();Menu();
-
-}
-*/
 void Management::Store()//保存
 
 {
@@ -1184,9 +1045,7 @@ void Management::Store()//保存
 int main()
 
 {
-
 	Management mc;
-
 	cout << "--*---*---*--*---*---*----*----*---*---*---*---*---*-----*\n"
 
 		<< "|**********************************************************|\n"
@@ -1209,42 +1068,6 @@ int main()
 	return 0;
 
 }
-/*void Management::read()
-
-{
-
-	fstream f;
-
-	f.open("d:\\project\\梁炤课程设计\\information.txt", ios::in);
-
-	if (!f)
-
-	{
-
-		cerr << "打开文件错误！" << endl;
-
-		Sleep(200);Menu();
-
-	}
-
-
-		cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
-		cout << "读取完成！";
-	while (!f.eof())
-
-	{
-		f >>t[present].Type>> t[present].Number >> t[present].type >> t[present].carnum >> t[present].cname >> t[present].year >> t[present].month >> t[present].day >> t[present].km >> t[present].V >> t[present].ymoney >> t[present].total_money;
-		present++;
-	}
-
-
-
-
-	f.close();
-	Sleep(200);Menu();
-
-
-}*/
 void Management::write()
 {
 	int m;cout << "是否确认写入？（是1 否2）";cin >> m;if (m == 1) { cout << "开始写入" << endl; }
@@ -1260,7 +1083,7 @@ void Management::write()
 		cout << "创建文件失败!" << endl;
 		return;
 	}
-	f.write((char*)t, 9* sizeof(Trans));present = n1 + n2 + n3;f << present;
+	f.write((char*)t, 9 * sizeof(Trans));present = n1 + n2 + n3;f << present;
 	cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 	cout << "写入成功" << endl;
 	
@@ -1282,7 +1105,7 @@ void Management::read()
 	}
 	else
 	{
-		f.read((char*)t, 9 * sizeof(Trans));f>>present;
+		f.read((char*)t, 9 * sizeof(Trans));f >> present;
 		f.close();
 		cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 
