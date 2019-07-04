@@ -139,17 +139,17 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 {
 
-	int  a(1);
+	int i;
 
 	while (true)
 
 	{
-
+        int  a(1);
 		if (present<9)//判断是否超出容量
 
 		{
 
-			int i;
+			
 
 			cout << "请开始输入车辆的信息：\n"
 
@@ -166,7 +166,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 				{
 					int choice;
 					cout << "该编号已存在！1 继续输入 2 返回菜单 ：" << endl;cin >> choice;
-					if (choice == 2) { Menu(); }
+					if (choice !=1) { Menu(); }
 					a++;
 
 					 break;
@@ -206,7 +206,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 				{
 
-					cout << "继续！";break;
+					cout << "继续！";
 
 				}
 				else Menu();
@@ -214,7 +214,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 			}
 
-			else a = 1; continue;
+			else  continue;
 
 		}
 
