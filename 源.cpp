@@ -169,7 +169,7 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 					if (choice == 2) { Menu(); }
 					a++;
 
-					break;
+					 break;
 
 				}
 
@@ -191,29 +191,30 @@ void Management::Getinfor()//获取信息包括不同类型的特有数据
 
 				cout << "购买日期：年：";cin >> t[present].year;cout << "月：";cin >> t[present].month;cout << "日：";cin >> t[present].day;
 
-				
+
 
 				cout << "已添加该车辆的信息！" << endl;
 
 				present++;
 
 
-
 				int x;
 
 				cout << "继续请输入1，结束请输入2：";cin >> x;
 
-				if (x == 2)
+				if (x == 1)
 
 				{
 
-					cout << "退出！" << endl;break;
+					cout << "继续！";break;
 
 				}
+				else Menu();
+				
 
 			}
 
-			else a = 1;continue;
+			else a = 1; continue;
 
 		}
 
@@ -439,11 +440,11 @@ void Management::Delinfor()//删除信息
 
 				{
 
-					string J;
+					int J;
 
-					cout << "该车辆已找到！是否确认删除？YES/NO";cin >> J;
+					cout << "该车辆已找到！是否确认删除？1.是2.否";cin >> J;
 
-					if (J == "YES" || J == "Yes" || J == "yes")
+					if (J)
 
 					{
 
@@ -457,7 +458,7 @@ void Management::Delinfor()//删除信息
 
 					}
 
-					else if (J == "NO" || J == "No" || J == "no") cout << "已取消删除" << endl;Sleep(200);Menu();
+					else if (2) cout << "已取消删除" << endl;Sleep(200);Menu();
 
 				}
 
@@ -467,7 +468,10 @@ void Management::Delinfor()//删除信息
 
 			{
 
-				cout << "要删除的编号不存在！" << endl;break;
+				cout << "要删除的编号不存在！" << endl;
+				int h;cout << "1.继续删除 2.返回菜单:";cin >> h;if (h == 1) { cout << "继续！" << endl; }
+				else Menu();
+				break;
 
 			}
 
@@ -1083,7 +1087,7 @@ void Management::write()
 		cout << "创建文件失败!" << endl;
 		return;
 	}
-	f.write((char*)t, 9 * sizeof(Trans));present = n1 + n2 + n3;f << present;
+	f.write((char*)t, 9 * sizeof(Trans));f << present;
 	cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180);cout << "*";Sleep(180); cout << endl;
 	cout << "写入成功" << endl;
 	
@@ -1115,7 +1119,6 @@ void Management::read()
 		Sleep(200);Menu();
 	}
 }
-
 
 
 
