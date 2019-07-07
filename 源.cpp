@@ -23,10 +23,10 @@ private:
 	string filename="infor";
 	int N ;
 	string sfilename = "store";
-	//Trans*t=new Trans[N];
+	int N1, N2, N3;
 	int n1 = 0; int n2 = 0;int n3 = 0;
 	int Km1 = 0, Km2 = 0, Km3 = 0;
-     Trans t[9];
+    Trans t[9];
 	int present;
 public:
 	Management()
@@ -49,6 +49,7 @@ public:
 	void read();
 	void Store();
     void Gettype();
+
 };
 void Management::Gettype()//获取类型及相应类型的数据，统计各类型总数，计算费用，给不必要的值赋值
 
@@ -109,8 +110,8 @@ void Management::Getoption()
 	{
 	case 1:
 	{
-		cout << "请输入你想写入的文件名：";cin >> filename;
-		cout << "请输入你想保存的文件名：";cin >> sfilename;
+		cout << "请输入你想写入的文件名：(0.返回菜单）";cin >> filename;if (filename == "0") { filename="infor";Getoption(); }
+		cout << "请输入你想保存的文件名：";cin >> sfilename;if (sfilename == "0") { sfilename="store";Getoption(); }
 		break;
 	}
 	case 2:
@@ -422,7 +423,7 @@ void Management::Delinfor()//删除信息
 
 		{
 
-			cout << "未录入任何信息！车辆信息库为空！" << endl;
+			cout << "未录入任何信息！车辆信息库为空！" << endl;break;
 
 		}
 
@@ -469,7 +470,7 @@ void Management::Delinfor()//删除信息
 			{
 
 				cout << "要删除的编号不存在！" << endl;
-				int h;cout << "1.继续删除 2.返回菜单:";cin >> h;if (h == 1) { cout << "继续！" << endl; }
+				int h;cout << "1.继续删除 2.返回菜单:";cin >> h;if (h == 1) { cout << "继续！" << endl;Delinfor(); }
 				else Menu();
 				break;
 
@@ -512,7 +513,7 @@ void Management::Ediinfor()//编辑
 
 			int a;int b;int c;Trans temp;temp = t[i];
 
-			cout << "已查询到你要找的车辆，请开始编辑：（注：不希望修改的地方请两次回车输入1,需要修改请输入2继续,0返回菜单.编号无法修改！）";
+			cout << "已查询到你要找的车辆，请开始编辑：（注：不希望修改的地方请输入1,需要修改请输入2继续,0返回菜单.编号无法修改！）";
 
 			cout << "编号为：" << n << endl;
 
@@ -963,13 +964,11 @@ void Management::Menu()//菜单
 		<< "=================**11.退出系统**======================\n" << endl;
 
 	int x;cout << "请输入需要服务的序号：";
-
 	cin >> x;
 
-	switch (x)
+	switch ( x)
 
 	{
-
 	case 1:cout << "***************【输入车辆信息】****************" << endl;Getinfor();break;
 
 	case 2:cout << "***************【查询车辆信息】****************" << endl;Searinfor();break;
@@ -1074,6 +1073,7 @@ int main()
 }
 void Management::write()
 {
+	N1 = n1;N2 = n2;N3 = n3;
 	int m;cout << "是否确认写入？（是1 否2）";cin >> m;if (m == 1) { cout << "开始写入" << endl; }
 	else Menu();
 	if (filename == "infor")
@@ -1100,7 +1100,7 @@ void Management::read()
 	{
 		cout << "读取当前文件！";
 	}
-	else cout << "读取" << filename << "文件" << endl;
+	
 	ifstream f(filename, ios::binary);
 	if (!f)
 	{
